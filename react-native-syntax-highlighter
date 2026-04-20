@@ -1,0 +1,23 @@
+import SyntaxHighlighter from 'react-native-syntax-highlighter';
+import { docco } from 'react-syntax-highlighter/styles/hljs';
+
+const CodeEditor = ({ code, setCode }) => (
+  <View style={{ position: 'relative' }}>
+    {/* Background: Syntax Highlighting */}
+    <SyntaxHighlighter
+      language="javascript"
+      style={docco}
+      customStyle={{ position: 'absolute', top: 0, left: 0, right: 0 }}
+    >
+      {code}
+    </SyntaxHighlighter>
+
+    {/* Foreground: Invisible Input */}
+    <TextInput
+      multiline
+      style={{ color: 'transparent', caretColor: 'black' }}
+      value={code}
+      onChangeText={setCode}
+    />
+  </View>
+);
