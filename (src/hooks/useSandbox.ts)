@@ -1,0 +1,25 @@
+import { useState, useCallback } from 'react';
+
+export type SandboxState = {
+  output: string[];
+  status: 'idle' | 'running' | 'error' | 'success';
+};
+
+export const useSandbox = () => {
+  const [state, setState] = useState<SandboxState>({ output: [], status: 'idle' });
+
+  const runCode = useCallback((sandboxRef: any, code: string) => {
+    setState({ output: [], status: 'running' });
+    sandboxRef.current?.runCode(code);
+  }, []);
+
+  const handleMessage = (message: string) => {
+    const { type, data } = JSON.parse(message);
+    setState(prev => ({
+      output: [...prev.output, data],
+      status: type === 'ERROR' ? 'error' : 'success'
+    }));
+  };
+
+  return { state, runCode, handleMessage };
+};
