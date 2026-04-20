@@ -1,0 +1,5 @@
+// All messages should follow this pattern
+{
+  "type": "SUCCESS" | "ERROR" | "LOG",
+  "payload": any
+}
