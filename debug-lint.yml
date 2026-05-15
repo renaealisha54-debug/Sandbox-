@@ -1,0 +1,8 @@
+- name: Install Linting Tools
+  run: npm install eslint@8 typescript --save-dev
+
+- name: Run Quality Check
+  run: npx eslint .
+
+- name: Run Type Check
+  run: npx tsc --noEmit
